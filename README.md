@@ -1,10 +1,17 @@
 ## Tasks Subscribe
 
 [![NPM Version][npm-image]][npm-url]
+[![Node Version][node-version-image]][node-url]
 
 Task Manager with Subscribers for [node](http://nodejs.org).
 
+## Installation
 
+```bash
+$ npm install tasks-subscribe
+```
+
+## Example
 ```js
 var TaskManager = require('tasks-subscribe');
 
@@ -40,15 +47,11 @@ TaskManager(userId).addTask(function(){
 // completed var
 ```
 
-## Installation
-
-```bash
-$ npm install tasks-subscribe
-```
-
 ## License
 
   [MIT](LICENSE)
 
 [npm-image]: https://img.shields.io/npm/v/tasks-subscribe.svg
 [npm-url]: https://npmjs.org/package/tasks-subscribe
+[node-url]: https://nodejs.org/
+[node-version-image]: https://img.shields.io/node/v/tasks-subscribe.svg
