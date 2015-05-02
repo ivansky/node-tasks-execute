@@ -1,0 +1,26 @@
+{
+  "name": "task-subscribe",
+  "description": "Tasks Manager contains Subscribe and Events",
+  "version": "1.0.0",
+  "author": "Ivan Martianov <i@ivansky.ru>",
+  "contributors": [],
+  "license": "MIT",
+  "repository": "ivansky/node-tasks-subscribe",
+  "homepage": "http://ivansky.ru/nodejs/tasks-subscribe",
+  "keywords": [
+    "tasks",
+    "subscribe",
+    "events"
+  ],
+  "dependencies": {},
+  "devDependencies": {},
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "files": [
+    "README.md",
+    "index.js",
+    "lib/"
+  ],
+  "scripts": {}
+}
