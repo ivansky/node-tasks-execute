@@ -1,5 +1,5 @@
 {
-  "name": "task-subscribe",
+  "name": "tasks-subscribe",
   "description": "Tasks Manager contains Subscribe and Events",
   "version": "1.0.0",
   "author": "Ivan Martianov <i@ivansky.ru>",

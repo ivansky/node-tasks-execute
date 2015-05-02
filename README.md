@@ -6,7 +6,7 @@ Task Manager with Subscribers for [node](http://nodejs.org).
 
 
 ```js
-var TaskManager = require('task-subscribe');
+var TaskManager = require('tasks-subscribe');
 
 var userId = 1;
  
@@ -43,7 +43,7 @@ TaskManager(userId).addTask(function(){
 ## Installation
 
 ```bash
-$ npm install task-subscribe
+$ npm install tasks-subscribe
 ```
 
 ## License
