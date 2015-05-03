@@ -15,8 +15,8 @@ $ npm install tasks-subscribe
 ```js
 var TaskManager = require('tasks-subscribe');
 
-var userId = 1;
- 
+var userId = 1; // user id, will be subscribed at the start
+
 // Get TaskManager Environment By UserID
 // And create task with some calculations
 TaskManager(userId).addTask(function(){
@@ -25,15 +25,24 @@ TaskManager(userId).addTask(function(){
 
 	this.trigger('test', {hello: 'hello world!'}); // trigger test event
 
-	self.done(); // call task done
+	// emulate long process work
+	setTimeout(function(){
+
+		self.done(); // call task done
+
+	}, 3000);
+
+	this.subscribe(2); // subscribe new user id before done
 
 }).settings(function(){
 
-	this.some = 'var';
+	this.some = 'task';
 
 }).on('done', function(){
 
-	console.log('completed', this.some); // completed var
+	console.log('completed', this.some); // completed task
+
+	console.log('users subscribed', this.getSubscribers()); // get subscribers at end
 
 	this.remove(); // set removed task's property and remove from stack
 
@@ -41,10 +50,14 @@ TaskManager(userId).addTask(function(){
 
 	console.log(context.hello); // hello world!
 
+	console.log('users subscribed', this.getSubscribers()); // get subscribers at any event
+
 }).start(); // Run task
 
 // hello world!
-// completed var
+// users subscribed [ 1 ]
+// completed task
+// users subscribed [ 1, 2 ]
 ```
 
 ## License
