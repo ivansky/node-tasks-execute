@@ -2,6 +2,7 @@
 
 [![NPM Version][npm-image]][npm-url]
 [![Node Version][node-version-image]][node-url]
+[![Build Status](travis-image)](travis-url)
 
 Task Manager with Subscribers for [node](http://nodejs.org).
 
@@ -76,3 +77,5 @@ TaskManager(userId).addTask(function(){
 [npm-url]: https://npmjs.org/package/tasks-subscribe
 [node-url]: https://nodejs.org/
 [node-version-image]: https://img.shields.io/node/v/tasks-subscribe.svg
+[travis-image]: https://travis-ci.org/ivansky/node-tasks-subscribe.svg?branch=master
+[travis-url]: https://travis-ci.org/ivansky/node-tasks-subscribe
