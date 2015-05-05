@@ -1,7 +1,7 @@
 {
   "name": "tasks-subscribe",
   "description": "Tasks Manager contains Subscribe and Events",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "author": "Ivan Martianov <i@ivansky.ru>",
   "contributors": [],
   "license": "MIT",
@@ -13,7 +13,9 @@
     "events"
   ],
   "dependencies": {},
-  "devDependencies": {},
+  "devDependencies": {
+    "mocha": "*"
+  },
   "engines": {
     "node": ">= 0.8.0"
   },
@@ -23,5 +25,7 @@
     "index.js",
     "lib/"
   ],
-  "scripts": {}
+  "scripts": {
+    "test": "mocha --reporter spec --grep ."
+  }
 }

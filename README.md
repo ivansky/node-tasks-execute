@@ -18,8 +18,8 @@ var TaskManager = require('tasks-subscribe');
 var userId = 1; // user id, will be subscribed at the start
 
 // Register global event to done
-TaskManager().on('done', function(){
-	console.log('global completed');
+TaskManager(0).on('done', function(){
+	console.log('global completed', this.name);
 });
 
 // Get TaskManager Environment By UserID
@@ -42,6 +42,8 @@ TaskManager(userId).addTask(function(){
 }).settings(function(){
 
 	this.some = 'task';
+	
+	this.name = 'Task Example';
 
 }).on('done', function(){
 
@@ -63,7 +65,7 @@ TaskManager(userId).addTask(function(){
 // users subscribed [ 1 ]
 // completed task
 // users subscribed [ 1, 2 ]
-// global completed
+// global completed Task Example
 ```
 
 ## License
