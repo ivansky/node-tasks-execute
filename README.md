@@ -2,7 +2,7 @@
 
 [![NPM Version][npm-image]][npm-url]
 [![Node Version][node-version-image]][node-url]
-[![Build Status](travis-image)](travis-url)
+[![Build Status][travis-image]][travis-url]
 
 Task Manager with Subscribers for [node](http://nodejs.org).
 
