@@ -1,8 +1,6 @@
 ## Tasks Subscribe
 
-[![NPM Version][npm-image]][npm-url]
-[![Node Version][node-version-image]][node-url]
-[![Build Status][travis-image]][travis-url]
+[![NPM Version][npm-image]][npm-url][![Node Version][node-version-image]][node-url][![Build Status][travis-image]][travis-url]
 
 Task Manager with Subscribers for [node](http://nodejs.org).
 
@@ -73,9 +71,9 @@ TaskManager(userId).addTask(function(){
 
   [MIT](LICENSE)
 
-[npm-image]: https://img.shields.io/npm/v/tasks-subscribe.svg
-[npm-url]: https://npmjs.org/package/tasks-subscribe
+[npm-image]: https://img.shields.io/badge/version-v1.0.4-blue.svg?style=flat-square
+[npm-url]: https://github.com/ivansky/node-tasks-subscribe/tree/v1.0
 [node-url]: https://nodejs.org/
-[node-version-image]: https://img.shields.io/node/v/tasks-subscribe.svg
-[travis-image]: https://travis-ci.org/ivansky/node-tasks-subscribe.svg?branch=master
+[node-version-image]: https://img.shields.io/badge/node-%3E=0.8.0-brightgreen.svg?style=flat-square
+[travis-image]: https://img.shields.io/travis/ivansky/node-tasks-subscribe/v1.0.svg?style=flat-square
 [travis-url]: https://travis-ci.org/ivansky/node-tasks-subscribe
