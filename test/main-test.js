@@ -14,7 +14,7 @@ describe("Generic main tests", function() {
 
 	it("Global events", function(){
 
-		TaskManager(0).on('done', function(){
+		TaskManager.getEnvironment().on('done', function(){
 
 			this.a++;
 
@@ -22,7 +22,7 @@ describe("Generic main tests", function() {
 
 		});
 
-		TaskManager(1).addTask(function(){
+		TaskManager.getEnvironment(1).addTask(function(){
 
 			this.done();
 
@@ -38,13 +38,29 @@ describe("Generic main tests", function() {
 
 	});
 
+	it("Set Settings as Object", function(){
+
+		TaskManager.getEnvironment(2).addTask(function(){
+
+			this.__settings.a++;
+
+			this.done();
+
+		}).settings({a: 2}).on('done', function(){
+
+			assert.strictEqual(3, this.get('a'));
+
+		}).start();
+
+	});
+
 	it("Collection output correct values and sorting", function() {
 
 		var userId = 1; // user id, will be subscribed at the start
 
 		var output = [];
 
-		TaskManager(0).on('done', function(){
+		TaskManager.getEnvironment().on('done', function(){
 
 			output.push(['global completed', this.name]);
 
@@ -54,7 +70,7 @@ describe("Generic main tests", function() {
 
 		// Get TaskManager Environment By UserID
 		// And create task with some calculations
-		TaskManager(userId).addTask(function(){
+		TaskManager.getEnvironment(userId).addTask(function(){
 
 			var self = this; // save link to Task instance
 

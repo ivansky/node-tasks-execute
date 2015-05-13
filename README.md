@@ -1,10 +1,8 @@
 ## Tasks Subscribe
 
-[![NPM Version][npm-image]][npm-url]
-[![Node Version][node-version-image]][node-url]
-[![Build Status][travis-image]][travis-url]
+[![NPM Version][npm-image]][npm-url][![Node Version][node-version-image]][node-url][![Build Status][travis-image]][travis-url][![Code Climate][codeclimate-image]][codeclimate-url]
 
-Task Manager with Subscribers for [node](http://nodejs.org).
+Task Manager with Subscribers for [node][node-url].
 
 ## Installation
 
@@ -19,13 +17,13 @@ var TaskManager = require('tasks-subscribe');
 var userId = 1; // user id, will be subscribed at the start
 
 // Register global event to done
-TaskManager(0).on('done', function(){
+TaskManager.getEnvironment().on('done', function(){
 	console.log('global completed', this.name);
 });
 
 // Get TaskManager Environment By UserID
 // And create task with some calculations
-TaskManager(userId).addTask(function(){
+TaskManager.getEnvironment(userId).addTask(function(){
 
 	var self = this; // save link to Task instance
 
@@ -41,18 +39,18 @@ TaskManager(userId).addTask(function(){
 	this.subscribe(2); // subscribe new user id before done
 
 }).settings(function(){
-
-	this.some = 'task';
 	
-	this.name = 'Task Example';
+	this.set('some', 'task');
 
+}).settings({
+	name: 'Task Example'
 }).on('done', function(){
 
-	console.log('completed', this.some); // completed task
+	console.log('completed', this.get('some')); // completed task
 
 	console.log('users subscribed', this.getSubscribers()); // get subscribers at end
 
-	this.remove(); // set removed task's property and remove from stack
+	this.stop(); // set removed task's property and remove from stack
 
 }).on('test',function(context){
 
@@ -73,9 +71,11 @@ TaskManager(userId).addTask(function(){
 
   [MIT](LICENSE)
 
-[npm-image]: https://img.shields.io/npm/v/tasks-subscribe.svg
+[npm-image]: https://img.shields.io/npm/v/tasks-subscribe.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/tasks-subscribe
 [node-url]: https://nodejs.org/
-[node-version-image]: https://img.shields.io/node/v/tasks-subscribe.svg
-[travis-image]: https://travis-ci.org/ivansky/node-tasks-subscribe.svg?branch=master
+[node-version-image]: https://img.shields.io/node/v/tasks-subscribe.svg?style=flat-square
+[travis-image]: https://img.shields.io/travis/ivansky/node-tasks-subscribe/master.svg?style=flat-square
 [travis-url]: https://travis-ci.org/ivansky/node-tasks-subscribe
+[codeclimate-image]: https://img.shields.io/codeclimate/github/ivansky/node-tasks-subscribe.svg?style=flat-square
+[codeclimate-url]: https://codeclimate.com/github/ivansky/node-tasks-subscribe
