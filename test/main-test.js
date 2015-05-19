@@ -10,11 +10,16 @@ var testOKResult = [
 	['global completed', 'Task Example']
 ];
 
+var testOKResultGlobals = [
+	['global completed', '1'],
+	['global completed', '2']
+];
+
 describe("Generic main tests", function() {
 
 	it("Global events", function(){
 
-		TaskManager.getEnvironment().on('done', function(){
+		TaskManager().on('done', function(){
 
 			this.a++;
 
@@ -22,7 +27,7 @@ describe("Generic main tests", function() {
 
 		});
 
-		TaskManager.getEnvironment(1).addTask(function(){
+		TaskManager(1).addTask(function(){
 
 			this.done();
 
@@ -40,7 +45,7 @@ describe("Generic main tests", function() {
 
 	it("Set Settings as Object", function(){
 
-		TaskManager.getEnvironment(2).addTask(function(){
+		TaskManager(2).addTask(function(){
 
 			this.__settings.a++;
 
@@ -60,7 +65,7 @@ describe("Generic main tests", function() {
 
 		var output = [];
 
-		TaskManager.getEnvironment().on('done', function(){
+		TaskManager().on('done', function(){
 
 			output.push(['global completed', this.name]);
 
@@ -70,7 +75,7 @@ describe("Generic main tests", function() {
 
 		// Get TaskManager Environment By UserID
 		// And create task with some calculations
-		TaskManager.getEnvironment(userId).addTask(function(){
+		TaskManager(userId).addTask(function(){
 
 			var self = this; // save link to Task instance
 
@@ -106,6 +111,39 @@ describe("Generic main tests", function() {
 			output.push(['users subscribed', this.getSubscribers()]); // get subscribers at any event
 
 		}).start(); // Run task
+
+	});
+
+	it("Additions Global Events", function(){
+		var userId = 1;
+		var output = [];
+
+		TaskManager(0).on('done', function(){
+
+			output.push(['global completed', '1']);
+
+		});
+
+		TaskManager(userId).addTask(function(){
+			var self = this;
+
+			setTimeout(function(){
+				self.done();
+			}, 1000);
+
+		}).on('done', function(){
+
+			output.push(['completed', 'self']);
+
+			console.log(output);
+
+			assert.strictEqual(testOKResultGlobals, output);
+
+		}).start();
+
+		TaskManager(0).on('done', function(){
+			output.push(['global completed', '2']);
+		});
 
 	});
 
