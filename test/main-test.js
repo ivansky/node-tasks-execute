@@ -1,6 +1,8 @@
 var assert = require('assert'),
 	TaskManager = require(__dirname+'/../');
 
+// Node Describe do not work here
+// @todo Async Testing
 
 var testOKResult = [
 	['hello world!'],
@@ -12,6 +14,7 @@ var testOKResult = [
 
 var testOKResultGlobals = [
 	['global completed', '1'],
+	['completed', 'self'],
 	['global completed', '2']
 ];
 
@@ -119,25 +122,21 @@ describe("Generic main tests", function() {
 		var output = [];
 
 		TaskManager(0).on('done', function(){
-
 			output.push(['global completed', '1']);
-
 		});
 
 		TaskManager(userId).addTask(function(){
 			var self = this;
 
-			setTimeout(function(){
+			this.step(function(){
 				self.done();
-			}, 1000);
+			});
 
 		}).on('done', function(){
 
 			output.push(['completed', 'self']);
 
-			console.log(output);
-
-			assert.strictEqual(testOKResultGlobals, output);
+			assert.deepEqual(testOKResultGlobals, output);
 
 		}).start();
 
