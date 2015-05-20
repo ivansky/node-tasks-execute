@@ -74,12 +74,13 @@ TaskManager(userId).addTask(function(){
 
 // hello world!
 // users subscribed [ 1 ]
-// global completed Task Example
 // completed task
 // users subscribed [ 1, 2 ]
+// global completed Task Example
 ```
 
-Events will raise like were initialized
+1. First Local Events
+2. Second Global Events
 
 ## License
 
