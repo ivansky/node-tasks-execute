@@ -17,24 +17,31 @@ var TaskManager = require('tasks-subscribe');
 var userId = 1; // user id, will be subscribed at the start
 
 // Register global event to done
-TaskManager.getEnvironment().on('done', function(){
+TaskManager().on('done', function(){
 	console.log('global completed', this.name);
 });
 
 // Get TaskManager Environment By UserID
 // And create task with some calculations
-TaskManager.getEnvironment(userId).addTask(function(){
+TaskManager(userId).addTask(function(){
 
 	var self = this; // save link to Task instance
 
 	this.trigger('test', {hello: 'hello world!'}); // trigger test event
-
+	// OR use steps
+	// this.step(this.trigger, this, 'test', {hello: 'hello world!'})
+	
 	// emulate long process work
-	setTimeout(function(){
-
-		self.done(); // call task done
-
-	}, 3000);
+	this.step(function(){
+	
+		setTimeout(function(){
+		
+    		self.done(); // call task done
+    
+    	}, 3000);
+    	
+	});
+	
 
 	this.subscribe(2); // subscribe new user id before done
 
@@ -43,7 +50,9 @@ TaskManager.getEnvironment(userId).addTask(function(){
 	this.set('some', 'task');
 
 }).settings({
+
 	name: 'Task Example'
+	
 }).on('done', function(){
 
 	console.log('completed', this.get('some')); // completed task
@@ -62,10 +71,12 @@ TaskManager.getEnvironment(userId).addTask(function(){
 
 // hello world!
 // users subscribed [ 1 ]
+// global completed Task Example
 // completed task
 // users subscribed [ 1, 2 ]
-// global completed Task Example
 ```
+
+Events will raise like were initialized
 
 ## License
 
