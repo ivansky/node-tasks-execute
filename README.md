@@ -27,23 +27,26 @@ TaskManager(userId).addTask(function(){
 
 	var self = this; // save link to Task instance
 
-	this.trigger('test', {hello: 'hello world!'}); // trigger test event
+	//this.trigger('test', {hello: 'hello world!'}); // trigger test event
 	// OR use steps
-	// this.step(this.trigger, this, 'test', {hello: 'hello world!'})
-	
+	this.step(this.trigger, this, 'test', {hello: 'hello world!'})
+
+	this.step(function(){
+
+		this.subscribe(2); // subscribe new user id before done
+
+	});
+
 	// emulate long process work
 	this.step(function(){
-	
-		setTimeout(function(){
-		
-    		self.done(); // call task done
-    
-    	}, 3000);
-    	
-	});
-	
 
-	this.subscribe(2); // subscribe new user id before done
+		setTimeout(function(){
+
+			self.done(); // call task done
+
+		}, 300);
+
+	});
 
 }).settings(function(){
 	
