@@ -16,67 +16,51 @@ var TaskManager = require('tasks-subscribe');
 
 var userId = 1; // user id, will be subscribed at the start
 
-// Register global event to done
-TaskManager().on('done', function(){
-	console.log('global completed', this.name);
-});
+var output = [];
 
 // Get TaskManager Environment By UserID
 // And create task with some calculations
-TaskManager(userId).addTask(function(){
+var task = TaskManager(userId).addTask(function(){
 
-	var self = this; // save link to Task instance
+	this.trigger('test', {hello: 'hello world!'}); // trigger test event
 
-	//this.trigger('test', {hello: 'hello world!'}); // trigger test event
-	// OR use steps
-	this.step(this.trigger, this, 'test', {hello: 'hello world!'})
-
-	this.step(function(){
-
-		this.subscribe(2); // subscribe new user id before done
-
-	});
-
-	// emulate long process work
-	this.step(function(){
-
-		setTimeout(function(){
-
-			self.done(); // call task done
-
-		}, 300);
-
-	});
-
-}).settings(function(){
-	
-	this.set('some', 'task');
+	this.done();
 
 }).settings({
 
+	some: 'task',
 	name: 'Task Example'
-	
+
 }).on('done', function(){
 
-	console.log('completed', this.get('some')); // completed task
+	output.push(['completed', this.get('some')]); // completed task
 
-	console.log('users subscribed', this.getSubscribers()); // get subscribers at end
-
-	this.stop(); // set removed task's property and remove from stack
+	output.push(['users subscribed on done', this.getSubscribers()]); // get subscribers at end
 
 }).on('test',function(context){
 
-	console.log(context.hello); // hello world!
+	output.push([context.hello]); // hello world!
 
-	console.log('users subscribed', this.getSubscribers()); // get subscribers at any event
+	output.push(['users subscribed at test event', this.getSubscribers()]); // get subscribers at any event
 
-}).start(); // Run task
+});
 
-// hello world!
-// users subscribed [ 1 ]
-// completed task
-// users subscribed [ 1, 2 ]
-// global completed Task Example
+task.start(); // Run task
+
+TaskManager().on('done', function(){
+
+	console.log(output);
+
+});
+
+/*
+[ [ 'hello world!' ],
+  [ 'users subscribed at test event', [ 1, 3 ] ],
+  [ 'completed', 'task' ],
+  [ 'users subscribed on done', [ 1, 3 ] ] ]
+*/
+
+task.subscribe(3);
 ```
 
 1. First Local Events
